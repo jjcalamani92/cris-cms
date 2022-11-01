@@ -61,7 +61,7 @@ export const SlideOversForm: FC<SlideOversForm> = ({ state, toggle, setLeft, chi
                       </button>
                     </div>
                   </Transition.Child>
-                  <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+                  <div className="h-full overflow-y-scroll bg-white shadow-xl">
                     {/* <div className="px-4 sm:px-6">
                       <Dialog.Title className="text-lg font-medium text-gray-900">Example Prescription</Dialog.Title>
                     </div> */}
@@ -69,9 +69,8 @@ export const SlideOversForm: FC<SlideOversForm> = ({ state, toggle, setLeft, chi
                     <div className="relative px-4 sm:px-6">
                       {/* Replace with your content */}
                       <div className="absolute inset-0">
-                        <div className="" aria-hidden="true" >
                           {children}
-                        </div>
+                        
 
 
                       </div>

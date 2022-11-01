@@ -4,6 +4,7 @@ import { ReactElement, ReactNode, useState } from 'react'
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { SessionProvider } from 'next-auth/react';
 import { NextPage } from 'next'
+import { ChakraProvider } from '@chakra-ui/react';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -25,11 +26,14 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
   return (
     <SessionProvider session={session}>
       <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          {
-            getLayout(<Component {...pageProps} />)
-          }
-        </Hydrate>
+        <ChakraProvider>
+
+          <Hydrate state={pageProps.dehydratedState}>
+            {
+              getLayout(<Component {...pageProps} />)
+            }
+          </Hydrate>
+        </ChakraProvider>
       </QueryClientProvider>
     </SessionProvider>
   )

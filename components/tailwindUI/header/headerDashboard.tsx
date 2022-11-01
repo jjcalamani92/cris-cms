@@ -6,9 +6,10 @@ import { useSession, signOut } from 'next-auth/react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { usePathname, useSearchParams } from 'next/navigation';
 import { classNames, getQuery } from '../../../src/utils'
 import { useLocalStorageState, useSessionStorageState } from 'ahooks'
-import { Session } from 'next-auth'
+
 const user = {
   name: 'Tom Cook',
   email: 'tom@example.com',
@@ -34,22 +35,7 @@ interface HeaderDashboard {
 
 export const HeaderDashboard: FC<HeaderDashboard> = ({ }) => {
   const { data: session, status } = useSession()
-  const [user, setUser] = useSessionStorageState< {
-    username:string
-    image: {
-      src:string
-      alt: string
-    }
-    role: string
-    sid: string
-  } | undefined>(
-    'use-local-storage-state-user',
-    {
-      defaultValue: session?.user,
-    },
-    );
-  // console.log(user);
-  
+
   const { asPath } = useRouter()
   const query = getQuery(asPath)
   return (
@@ -78,16 +64,15 @@ export const HeaderDashboard: FC<HeaderDashboard> = ({ }) => {
                           <Link
                             key={i}
                             href={`/dashboard/${item.href}`}
-                            className={classNames(
-                              query[1] === item.href
-                                ? 'bg-gray-900 text-white'
-                                : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                              'px-3 py-2 rounded-md text-sm font-medium'
-                            )}
-                            aria-current={item.current ? 'page' : undefined}
-                          >
+                              className={classNames(
+                                query[1] === item.href
+                                  ? 'bg-gray-900 text-white'
+                                  : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                'px-3 py-2 rounded-md text-sm font-medium'
+                              )}
+                            >
                             
-                              {item.name}
+                              {item.name} 
                             
                           </Link>
                         ))}

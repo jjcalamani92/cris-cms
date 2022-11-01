@@ -24,6 +24,7 @@ import { useDeleteManyProductById } from '../../../src/hooks'
 import Swal from 'sweetalert2'
 import { useToggle } from 'ahooks'
 import { SlideOversForm } from '../slide'
+import { TabSite } from '../../chakraUI'
 // import { SlideOversForm } from '../slide'
 
 interface HeadingDashboard {
@@ -75,7 +76,8 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
   const editHandle = (type: string) => {
     if (type === "site") {
       toggle()
-      // setChildren(<TabFormSite toggle={toggle} setLeft={setLeft} site={site} />)
+      setChildren(<TabSite  toggle={toggle} setLeft={setLeft} site={site}/>)
+      // toggle={toggle} setLeft={setLeft} site={site}
     } else if (type === "page") {
       toggle()
       // setChildren(<TabFormPage  toggle={toggle} setLeft={setLeft} page={page} type={page?.data.type} />)
@@ -90,6 +92,8 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
   const addHandle = (type: string) => {
     if (type === 'site') {
       toggle()
+      setChildren(<TabSite toggle={toggle} setLeft={setLeft} />)
+
       // setChildren(<TabFormSite toggle={toggle} setLeft={setLeft} />)
     }
     else if (type === 'page') {
